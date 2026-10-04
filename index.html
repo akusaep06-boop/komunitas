@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SA-MP Community</title>
+<script src="config.js"></script>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);--bg:#f3f3f3;--card:#fff;--tx:#111;--mu:#6b6b6b;--p:#111;--p2:#8a8a8a;--pt:#fff;--bd:#e0e0e0;--red:#e5484d;--grn:#16a37f}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a0a0a;--card:#161616;--tx:#f2f2f2;--mu:#9a9a9a;--bd:#2a2a2a;--p:#f2f2f2;--p2:#777;--pt:#111}}
+:root[data-theme="dark"]{--bg:#0a0a0a;--card:#161616;--tx:#f2f2f2;--mu:#9a9a9a;--bd:#2a2a2a;--p:#f2f2f2;--p2:#777;--pt:#111}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:'Segoe UI',system-ui,sans-serif;padding-bottom:88px;min-height:100vh}
+svg.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-4px}
+header{background:linear-gradient(135deg,#000,#3a3a3a);color:#fff;padding:16px 16px 54px}
+header div{max-width:920px;margin:auto;display:flex;align-items:center;gap:10px}
+header h1{margin:0;font-size:1.25rem;flex:1}header small{opacity:.9;display:block;font-weight:400;font-size:.8rem}
+.chip{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.2);border-radius:999px;padding:4px 12px 4px 4px;font-size:.85rem}
+main{max-width:920px;margin:-36px auto 0;padding:0 14px;display:grid;gap:14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:16px;box-shadow:0 6px 18px rgba(0,0,0,.08)}
+h2{margin:0 0 10px;font-size:1.05rem;color:var(--p)}
+.g{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.mu{color:var(--mu);font-size:.85rem}
+input,select,textarea,button{font:inherit}
+input,select,textarea{width:100%;padding:10px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);margin-bottom:8px}
+textarea{resize:vertical;min-height:70px}
+button,.btn{border:0;border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:600;color:var(--pt);background:var(--p);text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:.92rem}
+button.s{background:var(--bg);color:var(--p);border:1px solid var(--bd)}button.d{background:var(--red);color:#fff}
+button:disabled{opacity:.5}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.row>*{flex:1}
+.av{width:36px;height:36px;border-radius:50%;object-fit:cover;background:var(--p2);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:700;flex:none}
+.av.l{width:84px;height:84px;font-size:2rem}
+.pk img.pv{width:100%;height:150px;object-fit:cover;border-radius:10px;margin-bottom:8px;background:var(--bg)}
+.pk .ph{height:150px;border-radius:10px;margin-bottom:8px;background:linear-gradient(135deg,var(--p2),var(--p));opacity:.35}
+.tag{display:inline-block;background:var(--bg);color:var(--p);border:1px solid var(--bd);border-radius:999px;padding:2px 10px;font-size:.75rem;font-weight:600}
+.by{display:flex;gap:8px;align-items:center;margin:8px 0;font-size:.85rem;color:var(--mu)}.by .av{width:26px;height:26px;font-size:.75rem}
+.chat{padding:0;overflow:hidden}
+.chh{padding:14px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--bd)}.chh b{flex:1}.chh span{font-size:.78rem;color:var(--mu)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--grn);display:inline-block;margin-right:6px}
+#clist{height:58vh;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:3px;background:var(--bg)}
+.msg{display:flex;gap:8px;align-items:flex-end;max-width:86%}.msg.f{margin-top:10px}.msg.me{align-self:flex-end;flex-direction:row-reverse}
+.who{font-size:.72rem;color:var(--mu);margin:0 0 2px 6px}
+.bub{padding:9px 13px;border-radius:18px;background:var(--card);border:1px solid var(--bd);word-break:break-word;line-height:1.38;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.msg:not(.me) .bub{border-bottom-left-radius:5px}
+.msg.me .bub{background:var(--p);color:var(--pt);border-color:var(--p);border-bottom-right-radius:5px}
+.bub .t{font-size:.64rem;opacity:.6;margin-top:3px;text-align:right}
+.cmp{display:flex;gap:8px;padding:10px;border-top:1px solid var(--bd);background:var(--card);align-items:center}
+.cmp input{margin:0;border-radius:999px;padding:12px 16px}
+.cmp button{width:44px;height:44px;padding:0;border-radius:50%;flex:none}
+.empty{margin:auto;text-align:center;color:var(--mu);font-size:.9rem}
+.lk{cursor:pointer;color:inherit;text-decoration:none}.lk:hover{text-decoration:underline}
+.mb{display:flex;gap:10px;align-items:center;padding:8px;border:1px solid var(--bd);border-radius:12px;cursor:pointer;min-width:0}.mb div{min-width:0}.mb b{display:block}.mb small{color:var(--mu);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);background:var(--tx);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:.85rem;opacity:0;transition:opacity .25s;z-index:30;pointer-events:none;max-width:90%;text-align:center}
+#sh{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center;z-index:20}#sh .box{background:var(--card);color:var(--tx);width:100%;max-width:480px;border-radius:22px 22px 0 0;padding:22px 20px calc(22px + env(safe-area-inset-bottom,0px));text-align:center}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center}.stats b{display:block;font-size:1.5rem;color:var(--p)}
+.ur{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--bd)}.ur div{flex:1}.ur small{color:var(--mu);display:block}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--bd);display:flex;justify-content:center;gap:2px;padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));z-index:5}
+nav button{flex:1;max-width:120px;flex-direction:column;gap:2px;background:transparent;color:var(--mu);font-size:.68rem;padding:6px 2px}
+nav button.on{color:var(--p);background:var(--bg)}
+#note{text-align:center;color:var(--mu);font-size:.75rem;padding:10px}
+.err{color:var(--red);font-size:.85rem;min-height:1.2em}
+</style></head><body>
+<header><div><svg class="ic" id="shd" viewBox="0 0 24 24" style="width:30px;height:30px;cursor:pointer"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg><h1 id="ttl">SA-MP Community<small>Modpack, chat, dan voice war</small></h1><span class="chip" id="chip"></span></div></header>
+<main id="main"></main>
+<div id="note"></div>
+<nav id="nav"></nav>
+<script>
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const P={home:'<path d="M3 11l9-8 9 8v10H4z"/>',pack:'<path d="M21 8l-9-5-9 5v8l9 5 9-5zM3 8l9 5 9-5M12 13v8"/>',chat:'<path d="M4 4h16v12H8l-4 4z"/>',voice:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',adm:'<path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7zM9 12l2 2 4-4"/>',send:'<path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/>',dl:'<path d="M12 3v12M7 11l5 5 5-5M4 21h16"/>'};
+const ic=n=>`<svg class="ic" viewBox="0 0 24 24">${P[n]}</svg>`;
+const DISCORD='https://discord.com/channels/1530620165400694814/1530634577784213594';
+const ADMIN_HASH=window.ADMIN_HASH||'a3228a479bd2e3ae86ecb32a536c4365d45f671a7e1c3f5bfa0ae101734ea200';
+const CATS=['Skin Baju','Hit Sound','Skin Senjata','Skin Car','MonetLoader','Ikon Fast','Lainnya'];
+const D={users:{},chat:[],packs:[],cfg:{}};
+let DB=null,prev='home',viewU=null,cur='home',ME=null,ADM=false,pendAv=null,pendPv=null,mode='reg';
+try{ME=localStorage.getItem('samp_me');ADM=sessionStorage.getItem('samp_adm')=='1'}catch(e){}
+const hash=async(p,u)=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(u+':'+p+':samp')))].map(x=>x.toString(16).padStart(2,'0')).join('');
+
+/* ---- lapisan data: db bersama jika tersedia, jika tidak pakai penyimpanan lokal ---- */
+const subs={};
+const lg=c=>{try{return JSON.parse(localStorage.getItem('g_'+c)||'{}')}catch(e){return{}}};
+const fire=c=>subs[c]&&subs[c](Object.entries(lg(c)).map(([id,d])=>({id,...d})));
+const store={
+ async put(c,id,d){if(DB)return DB.collection(c).doc(id).set(d);const o=lg(c);o[id]=d;try{localStorage.setItem('g_'+c,JSON.stringify(o))}catch(e){throw Error('Penyimpanan penuh')}fire(c)},
+ async del(c,id){if(DB)return DB.collection(c).doc(id).delete();const o=lg(c);delete o[id];localStorage.setItem('g_'+c,JSON.stringify(o));fire(c)},
+ async get(c,id){if(DB){const s=await DB.collection(c).doc(id).get();return s.exists?s.data():null}return lg(c)[id]||null},
+ watch(c,cb){if(DB)DB.collection(c).onSnapshot(s=>cb(s.docs.map(x=>({id:x.id,...x.data()}))),()=>{});else{subs[c]=cb;fire(c)}}
+};
+function startWatch(){
+ store.watch('users',a=>{D.users={};a.forEach(x=>D.users[x.id]=x);if(ME&&D.users[ME]&&D.users[ME].banned)logout(1);upd()});
+ store.watch('chat',a=>{D.chat=a.sort((x,y)=>x.ts-y.ts).slice(-100);upd()});
+ store.watch('packs',a=>{D.packs=a.sort((x,y)=>y.ts-x.ts);upd()});
+ store.watch('cfg',a=>{D.cfg={};a.forEach(x=>D.cfg[x.id]=x);upd()});
+ $('note').textContent=DB?'Mode online: data dibagikan ke semua pengguna.':'Mode lokal: data hanya tersimpan di perangkat ini. Isi config.js untuk mengaktifkan mode online.';
+}
+const loadJs=u=>new Promise((ok,no)=>{const e=document.createElement('script');e.src=u;e.onload=ok;e.onerror=no;document.head.appendChild(e)});
+(async()=>{if(window.FIREBASE_CONFIG){try{const v='10.12.2',b='https://www.gstatic.com/firebasejs/'+v+'/';await loadJs(b+'firebase-app-compat.js');await loadJs(b+'firebase-firestore-compat.js');
+ firebase.initializeApp(window.FIREBASE_CONFIG);DB=firebase.firestore()}catch(e){DB=null}}startWatch()})();
+
+/* ---- util ---- */
+function resize(file,max,q,lim){return new Promise((ok,no)=>{const i=new Image();i.onload=()=>{const s=Math.min(1,max/Math.max(i.width,i.height)),c=document.createElement('canvas');c.width=Math.round(i.width*s);c.height=Math.round(i.height*s);c.getContext('2d').drawImage(i,0,0,c.width,c.height);let u=c.toDataURL('image/jpeg',q);while(lim&&u.length>lim&&q>.2){q-=.1;u=c.toDataURL('image/jpeg',q)}ok(u)};i.onerror=()=>no();i.src=URL.createObjectURL(file)})}
+const okImg=s=>typeof s=='string'&&s.startsWith('data:image/');
+const okUrl=s=>/^https?:\/\//i.test(s||'');
+const nm=u=>esc((D.users[u]&&D.users[u].name)||u);
+const av=(u,l,n)=>{const x=D.users[u]||{},a=n?'':` data-u="${esc(u)}" style="cursor:pointer"`;return okImg(x.av)?`<img class="av ${l?'l':''}" src="${x.av}" alt=""${a}>`:`<span class="av ${l?'l':''}"${a}>${esc((x.name||u||'?')[0].toUpperCase())}</span>`};
+const nl=u=>`<a class="lk" data-u="${esc(u)}">${nm(u)}</a>`;
+function openProf(u){if(cur=='chat')return sheet(u);if(cur!='prof')prev=cur;viewU=u;go('prof')}
+const tm=ts=>new Date(ts).toLocaleString('id-ID',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});
+
+/* ---- tampilan ---- */
+const V={
+home:()=>`<div class="card"><h2>Selamat datang di komunitas GTA SA-MP</h2><p class="mu" style="margin-top:0">Bagikan dan unduh modpack, ngobrol dengan pemain lain, dan gabung voice war di Discord.</p>
+ <div class="stats"><div><b id="s1">0</b><span class="mu">Member</span></div><div><b id="s2">0</b><span class="mu">Modpack</span></div><div><b id="s3">0</b><span class="mu">Pesan</span></div></div></div>
+ <div class="g"><div class="card"><h2>Modpack</h2><p class="mu">Skin baju, hit sound, skin senjata, skin car, MonetLoader, ikon fast, dan lainnya.</p><button onclick="go('pack')">Lihat Modpack</button></div>
+ <div class="card"><h2>Chat Komunitas</h2><p class="mu">Ngobrol dengan foto dan nama profil kamu.</p><button onclick="go('chat')">Buka Chat</button></div>
+ <div class="card"><h2>Voice War</h2><p class="mu">Gabung channel voice di Discord komunitas.</p><button onclick="go('voice')">Gabung</button></div></div>
+ <div class="card"><h2>Member</h2><div class="g" id="mlist"></div></div>`,
+pack:()=>`<div class="card"><div class="row"><h2 style="flex:2;margin:0">Modpack</h2><select id="fc" onchange="upd()" style="margin:0"><option value="">Semua kategori</option>${CATS.map(c=>`<option>${c}</option>`).join('')}</select><button onclick="$('shf').style.display=$('shf').style.display=='block'?'none':'block'" style="flex:1">${ic('pack')}Bagikan</button></div>
+ <div id="shf" style="display:none;margin-top:12px">${ME?`<input id="pt" placeholder="Judul modpack" maxlength="60"><select id="pc">${CATS.map(c=>`<option>${c}</option>`).join('')}</select>
+ <textarea id="pd" placeholder="Deskripsi singkat" maxlength="300"></textarea><input id="pl" placeholder="Link download (Mediafire, Google Drive, dll)">
+ <label class="mu">Foto preview (opsional)</label><input type="file" id="pf" accept="image/*" onchange="pickPv(this)"><div class="err" id="pe"></div><button onclick="share()" style="width:100%">Kirim Modpack</button>`:`<p class="mu">Masuk dulu lewat menu Profil untuk membagikan modpack.</p>`}</div></div>
+ <div class="g" id="plist"></div>`,
+chat:()=>`<div class="card chat"><div class="chh">${ic('chat')}<b>Chat Komunitas</b><span><i class="dot"></i><span id="cn">0</span> member</span></div><div id="clist"></div>${ME?`<div class="cmp"><input id="ct" placeholder="Ketik pesan..." maxlength="300" onkeydown="if(event.key=='Enter')send()"><button onclick="send()" aria-label="Kirim">${ic('send')}</button></div>`:`<div class="cmp"><span class="mu" style="padding:6px">Masuk lewat menu Profil untuk ikut chat.</span></div>`}</div>`,
+prof:()=>`<div id="pv"></div>`,
+voice:()=>`<div class="card"><h2>Voice War</h2><p class="mu" style="margin-top:0">Voice war dilakukan di server Discord komunitas. Tekan tombol di bawah untuk membuka channel-nya. Kamu perlu akun Discord dan sudah bergabung di server.</p><a class="btn" href="${DISCORD}" target="_blank" rel="noopener">${ic('voice')}Buka Voice War di Discord</a></div>`,
+user:()=>{if(!ME)return`<div class="card"><h2>${mode=='reg'?'Daftar Akun':'Masuk'}</h2><input id="au" placeholder="Username (huruf kecil, angka, _)" maxlength="16" autocapitalize="none"><input id="ap" type="password" placeholder="Password (min. 4 karakter)"><div class="err" id="ae"></div>
+ <button style="width:100%" onclick="${mode=='reg'?'reg()':'login()'}">${mode=='reg'?'Daftar':'Masuk'}</button><p class="mu" style="text-align:center">${mode=='reg'?'Sudah punya akun?':'Belum punya akun?'} <a href="#" onclick="mode=mode=='reg'?'in':'reg';go('user');return false" style="color:var(--p)">${mode=='reg'?'Masuk':'Daftar'}</a></p></div>`;
+ const u=D.users[ME]||{};pendAv=null;return`<div class="card"><h2>Profil Saya</h2><div class="row" style="margin-bottom:10px"><div id="avp" style="flex:none">${av(ME,1,1)}</div><div><b>@${esc(ME)}</b><div class="mu">Username untuk login tidak bisa diubah</div></div></div>
+ <label class="mu">Foto profil</label><input type="file" id="af" accept="image/*" onchange="pickAv(this)"><label class="mu">Nama tampilan</label><input id="pn" maxlength="20" value="${esc(u.name||ME)}">
+ <label class="mu">Bio</label><textarea id="pb" maxlength="120">${esc(u.bio||'')}</textarea><div class="err" id="pe2"></div>
+ <div class="row"><button onclick="saveProf()">Simpan Profil</button><button class="s" onclick="logout()">Keluar</button></div></div>`},
+adm:()=>{if(!ADM)return`<div class="card"><h2>Login Admin</h2><input id="apw" type="password" placeholder="Password admin"><div class="err" id="ape"></div><button style="width:100%" onclick="admLogin()">Masuk Admin</button></div>`;
+ return`<div class="card"><h2>Latar Belakang Website</h2><div class="row"><input type="color" id="bc" value="#f3f3f3" style="height:44px;padding:4px"><button onclick="setBg('color',$('bc').value)">Pakai Warna</button></div>
+ <label class="mu">Atau pilih foto</label><input type="file" id="bf" accept="image/*" onchange="bgImg(this)"><div class="err" id="be"></div><button class="s" onclick="store.del('cfg','bg')">Kembalikan Default</button></div>
+ <div class="card"><h2>Kelola Akun</h2><p class="mu" style="margin-top:0">Untuk menghapus modpack, buka menu Modpack lalu tekan Hapus.</p><div id="ulist"></div><button class="s" style="margin-top:10px" onclick="ADM=false;try{sessionStorage.removeItem('samp_adm')}catch(e){}go('adm')">Keluar Admin</button></div>`}
+};
+const UP={
+home:()=>{$('s1').textContent=Object.keys(D.users).length;$('s2').textContent=D.packs.length;$('s3').textContent=D.chat.length;
+ const a=Object.values(D.users).filter(u=>!u.banned).sort((x,y)=>y.ts-x.ts).slice(0,24);
+ $('mlist').innerHTML=a.length?a.map(u=>`<div class="mb" data-u="${esc(u.id)}">${av(u.id,0,1)}<div><b>${nm(u.id)}</b><small>${esc(u.bio||'Belum ada bio')}</small></div></div>`).join(''):'<div class="mu">Belum ada member.</div>'},
+pack:()=>{const f=$('fc')?$('fc').value:'';const a=D.packs.filter(p=>!f||p.c==f);
+ $('plist').innerHTML=a.length?a.map(p=>`<div class="card pk">${okImg(p.img)?`<img class="pv" src="${p.img}" alt="">`:'<div class="ph"></div>'}<span class="tag">${esc(p.c)}</span><h2 style="margin:6px 0 4px;color:var(--tx)">${esc(p.t)}</h2><div class="mu">${esc(p.d)}</div>
+ <div class="by">${av(p.u)}<span>${nl(p.u)}</span><span style="margin-left:auto">${tm(p.ts)}</span></div><div class="row">${okUrl(p.l)?`<a class="btn" href="${esc(p.l)}" target="_blank" rel="noopener noreferrer">${ic('dl')}Download</a>`:''}${ADM?`<button class="d" onclick="delPack('${esc(p.id)}')">${cfm==p.id?'Yakin hapus?':'Hapus'}</button>`:''}</div></div>`).join(''):'<div class="card mu">Belum ada modpack.</div>'},
+chat:()=>{const l=$('clist');if(!l)return;$('cn').textContent=Object.keys(D.users).length;const b=l.scrollTop+l.clientHeight>=l.scrollHeight-40;let last=null;
+ l.innerHTML=D.chat.length?D.chat.map(m=>{const me=m.u==ME,f=m.u!=last;last=m.u;
+  return`<div class="msg${me?' me':''}${f?' f':''}">${f?av(m.u):'<span style="width:36px;flex:none"></span>'}<div>${f?`<div class="who"${me?' style="text-align:right;margin:0 6px 2px 0"':''}>${nl(m.u)}</div>`:''}<div class="bub">${esc(m.t)}<div class="t">${new Date(m.ts).toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'})}</div></div></div></div>`}).join(''):'<div class="empty">Belum ada pesan.<br>Mulai obrolan pertama!</div>';if(b)l.scrollTop=l.scrollHeight},
+prof:()=>{const el=$('pv');if(!el)return;const u=D.users[viewU];
+ if(!u){el.innerHTML='<div class="card"><p class="mu">Profil tidak ditemukan.</p><button onclick="go(prev)">Kembali</button></div>';return}
+ const ps=D.packs.filter(p=>p.u==viewU);
+ el.innerHTML=`<div class="card" style="text-align:center">${av(viewU,1,1)}<h2 style="margin:10px 0 0;color:var(--tx)">${nm(viewU)}</h2><div class="mu">@${esc(viewU)}${u.banned?' - dibanned':''}</div>
+ <p style="margin:12px 0">${u.bio?esc(u.bio):'<span class="mu">Belum ada bio.</span>'}</p><div class="mu" style="margin-bottom:12px">Bergabung ${new Date(u.ts||Date.now()).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})}</div>
+ <div class="stats" style="grid-template-columns:repeat(2,1fr)"><div><b>${ps.length}</b><span class="mu">Modpack</span></div><div><b>${D.chat.filter(m=>m.u==viewU).length}</b><span class="mu">Pesan</span></div></div>
+ <div class="row" style="margin-top:14px"><button class="s" onclick="go(prev)">Kembali</button>${viewU==ME?`<button onclick="go('user')">Edit Profil</button>`:''}</div></div>
+ ${ps.length?`<div class="card"><h2>Modpack dari ${nm(viewU)}</h2>`+ps.map(p=>`<div class="ur"><div><b>${esc(p.t)}</b><small>${esc(p.c)} - ${tm(p.ts)}</small></div>${okUrl(p.l)?`<a class="btn" href="${esc(p.l)}" target="_blank" rel="noopener noreferrer">${ic('dl')}Download</a>`:''}</div>`).join('')+'</div>':''}`},
+adm:()=>{const l=$('ulist');if(!l)return;const a=Object.values(D.users);
+ l.innerHTML=a.length?a.map(u=>`<div class="ur">${av(u.id)}<div><b>${nl(u.id)}</b><small>@${esc(u.id)}${u.banned?' - DIBANNED':''}</small></div><button class="${u.banned?'s':'d'}" onclick="ban('${esc(u.id)}',${!u.banned})">${u.banned?'Buka Ban':'Banned'}</button></div>`).join(''):'<div class="mu">Belum ada akun.</div>'}
+};
+function upd(){const f=UP[cur];f&&f();const b=D.cfg.bg;
+ document.body.style.background=b&&b.type=='img'&&okImg(b.v)?`url(${b.v}) center/cover fixed`:b&&b.type=='color'&&/^#[0-9a-f]{6}$/i.test(b.v)?b.v:'';
+ $('chip').innerHTML=ME?`${av(ME)}${nm(ME)}`:'<span style="padding-left:8px">Tamu</span>'}
+function go(v){cur=v;$('main').innerHTML=V[v]();nav();upd();scrollTo(0,0)}
+function nav(){const a=[['home','Beranda'],['pack','Modpack'],['chat','Chat'],['voice','Voice'],['user','Profil']];
+ $('nav').innerHTML=a.map(([k,t])=>`<button data-v="${k}" class="${k==cur?'on':''}" onclick="go('${k}')">${ic(k)}${t}</button>`).join('')}
+let taps=0,tt;$('shd').onclick=()=>{taps++;clearTimeout(tt);tt=setTimeout(()=>taps=0,1500);if(taps>=(ADM?1:3)){taps=0;go('adm')}};
+
+/* ---- aksi ---- */
+const er=(id,t)=>{$(id).textContent=t};
+async function reg(){const u=$('au').value.trim().toLowerCase(),p=$('ap').value;
+ if(!/^[a-z0-9_]{3,16}$/.test(u))return er('ae','Username 3-16 karakter: huruf kecil, angka, atau _');if(p.length<4)return er('ae','Password minimal 4 karakter');
+ try{if(await store.get('users',u))return er('ae','Username sudah dipakai');
+ await store.put('users',u,{name:u,bio:'',av:'',h:await hash(p,u),banned:false,ts:Date.now()});enter(u)}catch(e){er('ae','Gagal mendaftar: '+(e.message||''))}}
+async function login(){const u=$('au').value.trim().toLowerCase(),p=$('ap').value;
+ try{const x=await store.get('users',u);if(!x||x.h!=await hash(p,u))return er('ae','Username atau password salah');if(x.banned)return er('ae','Akun ini dibanned oleh admin');enter(u)}catch(e){er('ae','Gagal masuk')}}
+function enter(u){ME=u;try{localStorage.setItem('samp_me',u)}catch(e){}go('user')}
+function logout(b){ME=null;try{localStorage.removeItem('samp_me')}catch(e){}go('user');if(b)setTimeout(()=>er('ae','Akun kamu dibanned oleh admin'),50)}
+async function pickAv(i){if(i.files[0])try{pendAv=await resize(i.files[0],256,.8,60000);$('avp').innerHTML=`<img class="av l" src="${pendAv}" alt="">`}catch(e){er('pe2','Foto tidak bisa dibaca')}}
+async function saveProf(){const u=D.users[ME];if(!u)return;const d={...u};delete d.id;d.name=$('pn').value.trim()||ME;d.bio=$('pb').value.trim();if(pendAv)d.av=pendAv;
+ try{await store.put('users',ME,d);er('pe2','Profil tersimpan');pendAv=null}catch(e){er('pe2','Gagal menyimpan: '+(e.message||''))}}
+async function send(){const t=$('ct').value.trim();if(!t||!ME)return;$('ct').value='';try{await store.put('chat',Date.now()+'_'+Math.random().toString(36).slice(2,6),{u:ME,t,ts:Date.now()})}catch(e){toast('Pesan gagal terkirim')}}
+async function pickPv(i){pendPv=null;if(i.files[0])try{pendPv=await resize(i.files[0],640,.7,90000)}catch(e){er('pe','Foto tidak bisa dibaca')}}
+async function share(){const t=$('pt').value.trim(),l=$('pl').value.trim();if(!t)return er('pe','Isi judul');if(!okUrl(l))return er('pe','Link download harus diawali http:// atau https://');
+ const id=Date.now()+'_'+ME;try{await store.put('packs',id,{t,c:$('pc').value,d:$('pd').value.trim(),l,img:pendPv||'',u:ME,ts:Date.now()});pendPv=null;go('pack')}catch(e){er('pe','Gagal membagikan: '+(e.message||''))}}
+function delPack(id){if(!ADM)return;
+ if(cfm!=id){cfm=id;toast('Tekan sekali lagi untuk menghapus');UP.pack();setTimeout(()=>{if(cfm==id){cfm=null;UP.pack&&cur=='pack'&&UP.pack()}},4000);return}
+ cfm=null;store.del('packs',id).then(()=>toast('Modpack dihapus')).catch(e=>{toast('Gagal menghapus: '+((e&&e.message)||'tidak ada izin'));UP.pack()})}
+let tto;function toast(t){let x=$('toast');if(!x){x=document.createElement('div');x.id='toast';document.body.appendChild(x)}x.textContent=t;x.style.opacity=1;clearTimeout(tto);tto=setTimeout(()=>x.style.opacity=0,2800)}
+let cfm=null;
+function sheet(u){const x=D.users[u];if(!x)return;const n=D.packs.filter(p=>p.u==u).length;
+ let h=document.createElement('div');h.id='sh';h.onclick=e=>{if(e.target.id=='sh')h.remove()};
+ h.innerHTML=`<div class="box">${av(u,1,1)}<h2 style="margin:10px 0 0;color:var(--tx)">${nm(u)}</h2><div class="mu">@${esc(u)} - ${n} modpack</div><p style="margin:12px 0">${x.bio?esc(x.bio):'<span class="mu">Belum ada bio.</span>'}</p>
+ <div class="row"><button class="s" onclick="$('sh').remove()">Tutup</button><button onclick="$('sh').remove();prev='chat';viewU='${esc(u)}';go('prof')">Lihat Profil</button></div></div>`;
+ document.body.appendChild(h)}
+async function admLogin(){if(await hash($('apw').value,'admin')!=ADMIN_HASH)return er('ape','Password admin salah');ADM=true;try{sessionStorage.setItem('samp_adm','1')}catch(e){}go('adm')}
+async function ban(u,f){if(!ADM)return;const d={...D.users[u]};delete d.id;d.banned=f;try{await store.put('users',u,d)}catch(e){toast('Gagal memproses')}}
+function setBg(t,v){if(ADM)store.put('cfg','bg',{type:t,v}).catch(()=>er('be','Gagal menyimpan'))}
+async function bgImg(i){if(i.files[0])try{setBg('img',await resize(i.files[0],1280,.6,170000))}catch(e){er('be','Foto tidak bisa dibaca')}}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-u]');if(t)openProf(t.dataset.u)});
+go(location.hash=='#admin'?'adm':'home');
+</script></body></html>
